@@ -33,6 +33,59 @@ class ProductPhotos extends Model
         }
     }
 
+    /**
+     * @param UploadedFile $newPhoto
+     */
+    public function updateFile(UploadedFile $newPhoto) {
+        try {
+            // salvar a nova imagem
+            self::uploadFiles($this->product_id, [$newPhoto]);
+
+            \DB::beginTransaction();
+            // atualizar o nome da nova imagem
+            $oldName = $this->photo_name;
+            $this->photo_name = $newPhoto->hashName();
+            $this->save();
+
+            // remover a imagem anterior
+            self::deleteFile($this->product_id, $oldName);
+
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            self::deleteFiles($this->product_id, [$newPhoto]);
+            throw $e;
+        }
+
+
+    }
+
+    /**
+     * @param UploadedFile $newPhoto
+     */
+    public function deleteWithPhoto() {
+        try {
+
+            \DB::beginTransaction();
+            // deletar o registro
+            $oldName = $this->photo_name;
+            $oldId = $this->id;
+            $result = $this->delete();
+
+            // remover a imagem anterior
+            self::deleteFile($oldId, $oldName);
+
+            \DB::commit();
+
+            return $result;
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw $e;
+        }
+
+
+    }
+
     public static function deleteFiles($productId, $files) {
         $path = self::photosPath($productId);
         foreach($files as $file) {
@@ -51,23 +104,6 @@ class ProductPhotos extends Model
             \File::delete($pathFile);
         }
 
-    }
-
-    /**
-     * @param UploadedFile $newPhoto
-     */
-    public function updateFile(UploadedFile $newPhoto) {
-
-        // salvar a nova imagem
-        self::uploadFiles($this->product_id, [$newPhoto]);
-
-        // atualizar o nome da nova imagem
-        $oldName = $this->photo_name;
-        $this->photo_name = $newPhoto->hashName();
-        $this->save();
-
-        // remover a imagem anterior
-        self::deleteFile($this->product_id, $oldName);
     }
 
     public static function uploadFiles($productId, array $files) {

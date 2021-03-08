@@ -20,8 +20,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function() {
     Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
     Route::resource('products', 'ProductController', ['except' => ['create', 'edit']]);
     Route::resource('products.categories', 'ProductCategoryController', ['only' => ['index', 'store', 'destroy']]);
-    Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit', 'update']]);
-        Route::post('products/{product}/photos/{photo}', ['as' => 'products.photos', 'uses' => 'ProductPhotoController@update']);
+    Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit']]);
     Route::resource('inputs', 'ProductInputController', ['only' => ['index', 'store', 'show']]);
     Route::resource('outputs', 'ProductOutputController', ['only' => ['index', 'store', 'show']]);
 });

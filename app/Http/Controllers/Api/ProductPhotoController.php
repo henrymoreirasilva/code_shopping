@@ -79,7 +79,7 @@ class ProductPhotoController extends Controller
     public function destroy(Product $product, ProductPhotos $photo)
     {
         if ($product->id == $photo->product_id) {
-            $photo->delete();
+            $photo->deleteWithPhoto();
             return response()->json([], 204);
         } else {
             return response()->json([], 400);
