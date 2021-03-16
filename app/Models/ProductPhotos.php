@@ -62,6 +62,7 @@ class ProductPhotos extends Model
 
     /**
      * @param UploadedFile $newPhoto
+     * @throws \Exception
      */
     public function deleteWithPhoto() {
         try {
@@ -129,7 +130,7 @@ class ProductPhotos extends Model
     }
 
     public function product() {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withTrashed();
     }
 
     public function getPhotoUrlAttribute(): string
