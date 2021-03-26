@@ -13,6 +13,6 @@ class UserTableSeeder extends Seeder
     {
 
         factory(CodeShopping\Models\User::class)->create(['email' => 'user@admin.com.br']);
-        factory(CodeShopping\Models\User::class, 4)->create();
+        factory(CodeShopping\Models\User::class, 15)->create();
     }
 }

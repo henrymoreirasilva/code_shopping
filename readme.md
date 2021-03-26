@@ -1,14 +1,8 @@
 # Desenvolva um WhatsApp de vendas
-_05/03/2020_
-## Imagens dos produtos 
+_26/03/2020_
+## Administração de usuários 
 
-#### Para remover uma imagem
-    DELETE: api/products/{product}/photos/{photo}
+#### Exclusão lógica
+    Criação de um CRUD para usuários
 
-#### Para alterar uma imagem
-    POST: api/products/{product}/photos/{photo}
-
-    Body: form-data
-
-    File field: newPhoto
 ---
