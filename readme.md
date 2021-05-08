@@ -1,8 +1,19 @@
 # Desenvolva um WhatsApp de vendas
-_26/03/2020_
-## Administração de usuários 
+_08/05/2021_
+## Móddulo Laravel
 
-#### Exclusão lógica
-    Criação de um CRUD para usuários
+### Autenticação JWT
 
 ---
+
+_26/03/2021_
+## Móddulo Laravel
+
+### Exclusão lógica
+
+---
+
+_05/03/2021_
+## Móddulo Laravel
+
+### Imagens dos produtos
